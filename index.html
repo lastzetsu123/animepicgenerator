@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Anime Pics Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #1e1e2f;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    h1 {
+      font-size: 8vw;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 5vw;
+      max-width: 90%;
+      background-color: #ff4081;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #e91e63;
+    }
+
+    .image-container {
+      margin-top: 30px;
+    }
+
+    #animeImg {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      display: none;
+    }
+
+    @media (min-width: 600px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      button {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Anime Pics Generator</h1>
+    <button id="generateBtn">Get Random Anime Pic</button>
+    <div class="image-container">
+      <img id="animeImg" src="" alt="Anime Image" />
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('generateBtn').addEventListener('click', function () {
+      fetch('https://api.waifu.pics/sfw/waifu')
+        .then(response => response.json())
+        .then(data => {
+          const animeImg = document.getElementById('animeImg');
+          animeImg.src = data.url;
+          animeImg.style.display = 'block';
+        })
+        .catch(error => {
+          console.error('Error fetching the image:', error);
+          alert('Failed to load image. Please try again later.');
+        });
+    });
+  </script>
+</body>
+</html>
